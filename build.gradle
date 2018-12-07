@@ -14,31 +14,20 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'net.java.dev.jna:jna:5.1.0'
 }
 
 boolean platformIsMacOS = System.getProperty("os.name").toLowerCase().contains("mac")
 
-task copydylib_to_resources {
+task compileObjC(type: Exec) {
     doFirst {
-        copy {
-            new File(projectDir, "src/main/resources/darwin/").mkdirs()
-            File dylib = new File(projectDir, "src/Objective-C/JMacNotification/Build/Products/Debug/libJMacNotification.dylib")
-            if(!dylib.exists() && platformIsMacOS) {
-                compileXcode.execute()
-            } else if (!dylib.exists()) {
-                throw new GradleException("The platform is not macOS so the dylib cannot be compiled and the precompiled dylib is missing.")
+        if (platformIsMacOS) {
+            new File(projectDir, "src/main/resources/darwin/libJMacNotification.dylib").delete()
+            commandLine "xcodebuild", "-project", "${projectDir}/src/main/objective-c/JMacNotification/JMacNotification.xcodeproj", "-scheme", "JMacNotification", "-configuration", "Debug", "CONFIGURATION_BUILD_DIR=${buildDir}/obj-c/"
+            copy {
+                from new File(buildDir, "obj-c/libJMacNotification.dylib")
+                into new File(projectDir, "src/main/resources/darwin/")
             }
-            from new File(projectDir, "src/Objective-C/JMacNotification/Build/Products/Debug/libJMacNotification.dylib")
-            into new File(projectDir, "src/main/resources/darwin")
-        }
-        println "Copied libJMacNotification.dylib to src/main/resources/darwin"
-    }
-}
-
-task compileXcode(type: Exec) {
-    doFirst {
-        if (!platformIsMacOS) {
-            commandLine "xcodebuild -scheme JMacNotification -configuration Debug"
         } else {
             throw new GradleException("Can only compile XCode projects on macOS.\n" +
                     "You can get a precompiled .dylib in ${projectDir}/src/main/resources/darwin/libJMacNotification.dylib")
