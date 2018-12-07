@@ -22,7 +22,7 @@ boolean platformIsMacOS = System.getProperty("os.name").toLowerCase().contains("
 task compileObjC(type: Exec) {
     doFirst {
         if (platformIsMacOS) {
-            new File(projectDir, "src/main/resources/darwin/libJMacNotification.dylib").delete()
+            new File("${projectDir}/src/main/resources/darwin/libJMacNotification.dylib").delete()
             commandLine "xcodebuild", "-project", "${projectDir}/src/main/objective-c/JMacNotification/JMacNotification.xcodeproj", "-scheme", "JMacNotification", "-configuration", "Debug", "CONFIGURATION_BUILD_DIR=${buildDir}/obj-c/"
             copy {
                 from new File(buildDir, "obj-c/libJMacNotification.dylib")

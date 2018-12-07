@@ -12,7 +12,7 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @interface JMacNotification : NSObject
 
-void showNotification(char* title, char* subtitle, char* informativeText);
+void showNotification(NSUserNotification* notification);
 
 NSUserNotification* newNSUserNotification();
 
@@ -24,16 +24,6 @@ NSUserNotification* setContentImage(NSUserNotification* notification, char* cont
 NSUserNotification* setHasActionButton(NSUserNotification* notification, bool hasActionButton);
 NSUserNotification* setActionButtonTitle(NSUserNotification* notification, char* actionButtonTitle);
 NSUserNotification* setOtherButtonTitle(NSUserNotification* notification, char* otherButtonTitle);
-
-// private values
-
-//NSUserNotification* setIdentityImage(NSUserNotification* notification, char* identityImagePath);
-//NSUserNotification* setidentityImageHasBorder(NSUserNotification* notification, bool hasIdentityImageBorder);
-//NSUserNotification* setIgnoresDoNotDisturb(NSUserNotification* notification, bool ignoresDoNotDisturb);
-//NSUserNotification* setLockscreenOnly(NSUserNotification* notification, bool lockscreenOnly);
-//NSUserNotification* setPoofsOnCancel(NSUserNotification* notification, bool poofsOnCancel);
-//NSUserNotification* setShowAlternateActionMenu(NSUserNotification* notification, bool poofsOnCancel);
-
 
 @end
 
