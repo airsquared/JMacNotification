@@ -17,13 +17,13 @@ void showNotification(NSUserNotification* notification);
 NSUserNotification* newNSUserNotification();
 
 // public values
-NSUserNotification* setTitle(NSUserNotification* notification, char* title);
-NSUserNotification* setSubtitle(NSUserNotification* notification, char* subtitle);
-NSUserNotification* setInformativeText(NSUserNotification* notification, char* informativeText);
-NSUserNotification* setContentImage(NSUserNotification* notification, char* contentImagePath);
-NSUserNotification* setHasActionButton(NSUserNotification* notification, bool hasActionButton);
-NSUserNotification* setActionButtonTitle(NSUserNotification* notification, char* actionButtonTitle);
-NSUserNotification* setOtherButtonTitle(NSUserNotification* notification, char* otherButtonTitle);
+void setTitle(NSUserNotification* notification, char* title);
+void setSubtitle(NSUserNotification* notification, char* subtitle);
+void setInformativeText(NSUserNotification* notification, char* informativeText);
+void setContentImage(NSUserNotification* notification, char* contentImagePath);
+void setHasActionButton(NSUserNotification* notification, bool hasActionButton);
+void setActionButtonTitle(NSUserNotification* notification, char* actionButtonTitle);
+void setOtherButtonTitle(NSUserNotification* notification, char* otherButtonTitle);
 
 @end
 

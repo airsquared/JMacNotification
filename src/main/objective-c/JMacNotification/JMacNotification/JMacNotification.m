@@ -31,39 +31,32 @@ NSUserNotification* newNSUserNotification() {
     return [NSUserNotification new];
 }
 
-NSUserNotification* setTitle(NSUserNotification* notification, char* title) {
+void setTitle(NSUserNotification* notification, char* title) {
     notification.title = toNSString(title);
-    return notification;
 }
 
-NSUserNotification* setSubtitle(NSUserNotification* notification, char* subtitle) {
+void setSubtitle(NSUserNotification* notification, char* subtitle) {
     notification.subtitle = toNSString(subtitle);
-    return notification;
 }
 
-NSUserNotification *setInformativeText(NSUserNotification *notification, char *informativeText) {
+void setInformativeText(NSUserNotification *notification, char *informativeText) {
     notification.informativeText = toNSString(informativeText);
-    return notification;
 }
 
-NSUserNotification *setContentImage(NSUserNotification *notification, char *contentImagePath) {
+void setContentImage(NSUserNotification *notification, char *contentImagePath) {
     notification.contentImage = toNSImage(contentImagePath);
-    return notification;
 }
 
-NSUserNotification *setHasActionButton(NSUserNotification *notification, bool hasActionButton) {
+void setHasActionButton(NSUserNotification *notification, bool hasActionButton) {
     notification.hasActionButton = hasActionButton;
-    return notification;
 }
 
-NSUserNotification *setActionButtonTitle(NSUserNotification *notification, char *actionButtonTitle) {
+void setActionButtonTitle(NSUserNotification *notification, char *actionButtonTitle) {
     notification.actionButtonTitle = toNSString(actionButtonTitle);
-    return notification;
 }
 
-NSUserNotification *setOtherButtonTitle(NSUserNotification *notification, char *otherButtonTitle) {
+void setOtherButtonTitle(NSUserNotification *notification, char *otherButtonTitle) {
     notification.otherButtonTitle = toNSString(otherButtonTitle);
-    return notification;
 }
 
 @end

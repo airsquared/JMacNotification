@@ -9,11 +9,11 @@ public class NSUserNotification {
 
     public static native Pointer newNSUserNotification();
 
-    public static native Pointer setTitle(Pointer notification, String title);
+    public static native void setTitle(Pointer notification, String title);
 
-    public static native Pointer setSubtitle(Pointer notification, String subtitle);
+    public static native void setSubtitle(Pointer notification, String subtitle);
 
-    public static native Pointer setInformativeText(Pointer notification, String informativeText);
+    public static native void setInformativeText(Pointer notification, String informativeText);
 
     static {
         Native.register("JMacNotification");
