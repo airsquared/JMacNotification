@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package airsquared.JMacNotification.natives;import airsquared.JMacNotification.natives.NSUserNotifications;
+package airsquared.JMacNotification.natives;
+
 import com.sun.jna.Pointer;
 import org.junit.Test;
 

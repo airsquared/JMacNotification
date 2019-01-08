@@ -19,6 +19,40 @@ package airsquared.JMacNotification.natives;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
+/**
+ * This class contains static methods relating to Objective-C NSUserNotifications
+ * that are directly mapped to native code using JNA.
+ *
+ * To create a new ObjC NSUserNotification, use {@link #create()}.
+ * In any get/set method in this class, the first parameter
+ * is always a Pointer to an ObjC NSUserNotification.
+ *
+ * If a method takes a Pointer as an argument that is not a NSUserNotification,
+ * use the methods in {@link NSTypes} to get the appropriate one.
+ *
+ * Example:
+ * <pre>
+ * {@code
+ *     Pointer notification = NSUserNotification.create();
+ *
+ *     NSUserNotifications.setTitle(notification, title);
+ *     NSUserNotifications.setSubtitle(notification, subtitle);
+ *     NSUserNotifications.setInformativeText(notification, body);
+ *     NSUserNotifications.setContentImagePath(notif, getClass().getResource("test-image.jpeg").getPath());
+ *
+ *     NSUserNotifications.showNotification(notification);
+ * }
+ * </pre>
+ *
+ * For more examples see the test class {@code airsquared.JMacNotification.natives.NSUserNotificationsTest}
+ *
+ *
+ * See NSUserNotifications.h and NSUserNotifications.m in the source code,
+ * located in src/main/objective-c/JMacNotification.
+ *
+ * @author airsquared
+ * @see NSTypes
+ */
 public class NSUserNotifications {
 
     /**
@@ -308,7 +342,7 @@ public class NSUserNotifications {
     }
 
     /**
-     * The class NSUserNotifications cannot be instantiated; all methods are static
+     * The class NSUserNotifications cannot be instantiated; all methods are static.
      *
      * Use {@link #create()}
      */

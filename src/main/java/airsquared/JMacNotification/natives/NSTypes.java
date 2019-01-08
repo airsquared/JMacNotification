@@ -18,6 +18,21 @@ package airsquared.JMacNotification.natives;
 
 import com.sun.jna.Pointer;
 
+/**
+ * This class contains static methods for creating and converting between ObjC types
+ * that are used for other methods in this library.
+ *
+ * The methods in this class are directly mapped to native code using JNA.
+ *
+ * To get an NSDate, you have to first create a NSDateComponents
+ * and use {@link #toNSDate(Pointer)}.
+ *
+ * Any method that modifies a NSArray takes a NSMutableArray
+ * as an parameter instead of a regular NSArray
+ *
+ * @author airsquared
+ * @see NSUserNotifications
+ */
 public class NSTypes {
 
     /* basic convertion functions **/
