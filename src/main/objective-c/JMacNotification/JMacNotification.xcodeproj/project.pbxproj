@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31B4A45721B24B85007E0ACB /* JMacNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B4A45621B24B85007E0ACB /* JMacNotification.h */; };
-		31B4A45921B24B85007E0ACB /* JMacNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B4A45821B24B85007E0ACB /* JMacNotification.m */; };
+		1CB66E60CDBCDFE5C5E1BC5F /* NSTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CB66FA74F1DCAB38A9F1FA3 /* NSTypes.h */; };
+		1CB66EA1C3C43AFB4286191A /* NSTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB66820B12EAD50BF845BA7 /* NSTypes.m */; };
+		31B4A45721B24B85007E0ACB /* NSUserNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B4A45621B24B85007E0ACB /* NSUserNotifications.h */; };
+		31B4A45921B24B85007E0ACB /* NSUserNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B4A45821B24B85007E0ACB /* NSUserNotifications.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1CB66820B12EAD50BF845BA7 /* NSTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTypes.m; sourceTree = "<group>"; };
+		1CB66FA74F1DCAB38A9F1FA3 /* NSTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTypes.h; sourceTree = "<group>"; };
 		31B4A45321B24B85007E0ACB /* libJMacNotification.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libJMacNotification.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		31B4A45621B24B85007E0ACB /* JMacNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMacNotification.h; sourceTree = "<group>"; };
-		31B4A45821B24B85007E0ACB /* JMacNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMacNotification.m; sourceTree = "<group>"; };
+		31B4A45621B24B85007E0ACB /* NSUserNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSUserNotifications.h; sourceTree = "<group>"; };
+		31B4A45821B24B85007E0ACB /* NSUserNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSUserNotifications.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,8 +51,10 @@
 		31B4A45521B24B85007E0ACB /* JMacNotification */ = {
 			isa = PBXGroup;
 			children = (
-				31B4A45621B24B85007E0ACB /* JMacNotification.h */,
-				31B4A45821B24B85007E0ACB /* JMacNotification.m */,
+				31B4A45621B24B85007E0ACB /* NSUserNotifications.h */,
+				31B4A45821B24B85007E0ACB /* NSUserNotifications.m */,
+				1CB66820B12EAD50BF845BA7 /* NSTypes.m */,
+				1CB66FA74F1DCAB38A9F1FA3 /* NSTypes.h */,
 			);
 			path = JMacNotification;
 			sourceTree = "<group>";
@@ -60,7 +66,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31B4A45721B24B85007E0ACB /* JMacNotification.h in Headers */,
+				31B4A45721B24B85007E0ACB /* NSUserNotifications.h in Headers */,
+				1CB66E60CDBCDFE5C5E1BC5F /* NSTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +127,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31B4A45921B24B85007E0ACB /* JMacNotification.m in Sources */,
+				31B4A45921B24B85007E0ACB /* NSUserNotifications.m in Sources */,
+				1CB66EA1C3C43AFB4286191A /* NSTypes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

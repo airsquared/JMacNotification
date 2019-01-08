@@ -32,5 +32,5 @@ out/
 hs_err_pid*
 
 
-# xcode stuff
-**/xcuserdata/
+## User settings
+xcuserdata/
