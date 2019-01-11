@@ -16,6 +16,7 @@
 
 package airsquared.JMacNotification.natives;
 
+import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
 /**
@@ -54,6 +55,20 @@ public class NSTypes {
      * Underlying ObjC method call: {@code [[NSImage alloc] initWithContentsOfFile:toNSString(path)] }
      */
     public static native Pointer toNSImage(String path);
+
+    /**
+     * Converts a string to an ObjC NSUserNotificationActivationType.
+     *
+     * @return An ObjC NSUserNotificationActivationType.
+     */
+    public static native Pointer toNSUserNotificationActivationType(String string);
+
+    /**
+     * Converts an ObjC NSUserNotificationActivationType to a string.
+     *
+     * @param notificationActivationType An ObjC NSUserNotificationActivationType
+     */
+    public static native String toStringNSUserNotificationActivation(Pointer notificationActivationType);
 
 
     /* NSDate/NSDateComponents functions */
@@ -147,5 +162,15 @@ public class NSTypes {
     public static native void replaceObjectAtIndex(Pointer array, int index, Pointer withObject);
 
     public static native void exchangeObjectAtIndex(Pointer array, int object1Index, int object2Index);
+
+    static {
+        Native.register("JMacNotification");
+    }
+
+    /**
+     * The class NSTypes cannot be instantiated; all methods are static.
+     */
+    private NSTypes() {
+    }
 
 }

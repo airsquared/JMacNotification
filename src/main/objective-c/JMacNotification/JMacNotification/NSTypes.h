@@ -18,6 +18,10 @@ char *toCString(NSString *string);
 
 NSImage *toNSImage(char *path);
 
+NSUserNotificationActivationType toNSUserNotificationActivationType(char *string);
+
+char *toStringNSUserNotificationActivation(NSUserNotificationActivationType notificationActivationType);
+
 
 /** NSDate/NSDateComponents functions */
 

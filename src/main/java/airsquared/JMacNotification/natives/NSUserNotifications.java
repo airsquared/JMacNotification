@@ -38,7 +38,7 @@ import com.sun.jna.Pointer;
  *     NSUserNotifications.setTitle(notification, title);
  *     NSUserNotifications.setSubtitle(notification, subtitle);
  *     NSUserNotifications.setInformativeText(notification, body);
- *     NSUserNotifications.setContentImagePath(notif, getClass().getResource("test-image.jpeg").getPath());
+ *     NSUserNotifications.setContentImagePath(notification, getClass().getResource("test-image.jpeg").getPath());
  *
  *     NSUserNotifications.showNotification(notification);
  * }

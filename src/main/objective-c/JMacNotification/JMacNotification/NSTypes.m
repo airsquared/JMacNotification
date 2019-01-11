@@ -25,6 +25,42 @@ NSImage *toNSImage(char *path) {
     return [[NSImage alloc] initWithContentsOfFile:toNSString(path)];
 }
 
+NSUserNotificationActivationType toNSUserNotificationActivationType(char *string) {
+    NSArray* NSUserNotificationActivationTypes = @[
+            @"NSUserNotificationActivationTypeNone",
+            @"NSUserNotificationActivationTypeContentsClicked",
+            @"NSUserNotificationActivationTypeActionButtonClicked",
+            @"NSUserNotificationActivationTypeReplied",
+            @"NSUserNotificationActivationTypeAdditionalActionClicked"];
+    switch ([NSUserNotificationActivationTypes indexOfObject:toNSString(string)]) {
+        case 0:
+            return NSUserNotificationActivationTypeNone;
+        case 1:
+            return NSUserNotificationActivationTypeContentsClicked;
+        case 2:
+            return NSUserNotificationActivationTypeActionButtonClicked;
+        case 3:
+            return NSUserNotificationActivationTypeReplied;
+        case 4:
+            return NSUserNotificationActivationTypeAdditionalActionClicked;
+        default:
+            return nil;
+    }
+}
+
+char *const NSUserNotificationActivationTypeToString[] = {
+        [NSUserNotificationActivationTypeNone] = "NSUserNotificationActivationTypeNone",
+        [NSUserNotificationActivationTypeContentsClicked]  = "NSUserNotificationActivationTypeContentsClicked",
+        [NSUserNotificationActivationTypeActionButtonClicked] = "NSUserNotificationActivationTypeActionButtonClicked",
+        [NSUserNotificationActivationTypeReplied] = "NSUserNotificationActivationTypeReplied",
+        [NSUserNotificationActivationTypeAdditionalActionClicked] = "NSUserNotificationActivationTypeAdditionalActionClicked"
+};
+
+
+char *toStringNSUserNotificationActivation(NSUserNotificationActivationType notificationActivationType) {
+    return NSUserNotificationActivationTypeToString[notificationActivationType];
+}
+
 
 /** NSDate/NSDateComponents functions */
 

@@ -164,7 +164,7 @@ char *getSoundName(NSUserNotification *notification) {
 /* user notification activation method */
 
 char *getActivationType(NSUserNotification *notification) {
-    return NSUserNotificationActivationTypeToString[notification.activationType];
+    return toStringNSUserNotificationActivation(notification.activationType);
 }
 
 NSUserNotificationAction *getAdditionalActivationAction(NSUserNotification *notification) {
@@ -180,13 +180,6 @@ NSArray<NSUserNotificationAction*> *getAdditionalActionsArray(NSUserNotification
 
 
 /* constants */
-char *const NSUserNotificationActivationTypeToString[] = {
-        [NSUserNotificationActivationTypeNone] = "NSUserNotificationActivationTypeNone",
-        [NSUserNotificationActivationTypeContentsClicked]  = "NSUserNotificationActivationTypeContentsClicked",
-        [NSUserNotificationActivationTypeActionButtonClicked] = "NSUserNotificationActivationTypeActionButtonClicked",
-        [NSUserNotificationActivationTypeReplied] = "NSUserNotificationActivationTypeReplied",
-        [NSUserNotificationActivationTypeAdditionalActionClicked] = "NSUserNotificationActivationTypeAdditionalActionClicked"
-};
 
 char *getNSUserNotificationDefaultSoundName() {
     return toCString(NSUserNotificationDefaultSoundName);
