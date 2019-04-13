@@ -17,23 +17,16 @@ dependencies {
     compile 'net.java.dev.jna:jna:5.2.0'
 }
 
-boolean platformIsMacOS = System.getProperty("os.name").toLowerCase().contains("mac")
-
 task compileObjC(type: Exec) {
-    doFirst {
-        if (platformIsMacOS) {
-            new File("${projectDir}/src/main/resources/darwin/libJMacNotification.dylib").delete()
-            commandLine "xcodebuild",
-                    "-project", "${projectDir}/src/main/objective-c/JMacNotification/JMacNotification.xcodeproj",
-                    "-scheme", "JMacNotification", "-configuration", "Debug", "CONFIGURATION_BUILD_DIR=${buildDir}/obj-c/",
-                    "CODE_SIGNING_ALLOWED=\"NO\"" // disable running the `codesign` command
-            copy {
-                from new File(buildDir, "obj-c/libJMacNotification.dylib")
-                into new File(projectDir, "src/main/resources/darwin/")
-            }
-        } else {
-            throw new GradleException("Can only compile XCode projects on macOS.\n" +
-                    "You can get a precompiled .dylib in ${projectDir}/src/main/resources/darwin/libJMacNotification.dylib")
+    commandLine "xcodebuild",
+            "-project", "${projectDir}/src/main/objective-c/JMacNotification/JMacNotification.xcodeproj",
+            "-scheme", "JMacNotification", "-configuration", "Debug", "CONFIGURATION_BUILD_DIR=${buildDir}/obj-c/",
+            "-quiet", "CODE_SIGNING_ALLOWED=\"NO\"" // disable running the `codesign` command
+    doLast {
+        copy {
+            from new File(buildDir, "obj-c/libJMacNotification.dylib")
+            into new File(projectDir, "src/main/resources/darwin/")
         }
     }
+    assemble.dependsOn compileObjC
 }
