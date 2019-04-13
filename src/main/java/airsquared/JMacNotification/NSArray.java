@@ -25,7 +25,6 @@ import java.util.List;
 /**
  * @author airsquared
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
 public class NSArray implements NSObject {
 
     private Pointer pointer;

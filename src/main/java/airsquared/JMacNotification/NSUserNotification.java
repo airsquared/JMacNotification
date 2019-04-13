@@ -27,10 +27,9 @@ import java.util.TimeZone;
 /**
  * @author airsquared
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
 public class NSUserNotification implements NSObject {
 
-    Pointer pointer;
+    private Pointer pointer;
 
     public NSUserNotification() {
         pointer = NSUserNotifications.create();

@@ -22,7 +22,6 @@ import com.sun.jna.Pointer;
 /**
  * @author airsquared
  */
-@SuppressWarnings("unused")
 public class NSUserNotificationAction implements NSObject {
 
     private Pointer pointer;

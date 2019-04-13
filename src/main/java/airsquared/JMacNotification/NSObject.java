@@ -21,7 +21,6 @@ import com.sun.jna.Pointer;
 /**
  * @author airsquared
  */
-@SuppressWarnings("unused")
 public interface NSObject {
 
     Pointer getPointer();

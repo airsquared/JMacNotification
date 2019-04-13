@@ -24,7 +24,6 @@ import java.time.LocalDateTime;
 /**
  * @author airsquared
  */
-@SuppressWarnings("WeakerAccess")
 public class NSDateComponents implements NSObject {
 
     private Pointer pointer;
