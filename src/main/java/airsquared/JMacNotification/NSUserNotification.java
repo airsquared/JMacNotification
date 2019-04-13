@@ -175,6 +175,10 @@ public class NSUserNotification implements NSObject {
         NSUserNotifications.setAdditionalActionsArray(pointer, additionalActions.getPointer());
     }
 
+    public void show() {
+        NSUserNotifications.showNotification(pointer);
+    }
+
     public enum NSUserNotificationActivationType {
         /**
          * The user did not interact with the notification alert.
