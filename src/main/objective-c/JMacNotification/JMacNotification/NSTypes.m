@@ -25,6 +25,14 @@ NSImage *toNSImage(char *path) {
     return [[NSImage alloc] initWithContentsOfFile:toNSString(path)];
 }
 
+bool isEqual(NSObject *object1, NSObject *object2) {
+    return [object1 isEqual:object2];
+}
+
+int hash(NSObject *object) {
+    return (int) object.hash;
+}
+
 NSUserNotificationActivationType toNSUserNotificationActivationType(char *string) {
     NSArray* NSUserNotificationActivationTypes = @[
             @"NSUserNotificationActivationTypeNone",
@@ -108,6 +116,11 @@ void setSecond(NSDateComponents *dateComponents, int second) {
 }
 int getSecond(NSDateComponents *dateComponents) {
     return (int) dateComponents.second;
+}
+
+NSDateComponents *toDateComponents(NSDate *date) {
+    return [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth |
+            NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:date];
 }
 
 // uses [NSCalendar currentCalendar]

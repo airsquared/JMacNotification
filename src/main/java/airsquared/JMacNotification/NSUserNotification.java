@@ -21,165 +21,158 @@ import airsquared.JMacNotification.natives.NSUserNotifications;
 import com.sun.jna.Pointer;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.TimeZone;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author airsquared
  */
-public class NSUserNotification {
+@SuppressWarnings({"unused", "WeakerAccess"})
+public class NSUserNotification implements NSObject {
 
-    // Display Information
+    Pointer pointer;
 
-    private String title;
-    private String subtitle;
-    private String informativeText;
-    private File contentImage;
-    private String identifier;
-    // String response
-    private String responsePlaceholder;
+    public NSUserNotification() {
+        pointer = NSUserNotifications.create();
+    }
 
-    // Displayed Notification Buttons
+    public NSUserNotification(Pointer p) {
+        pointer = p;
+    }
 
-    private boolean hasActionButton;
-    private String actionButtonTitle;
-    private String otherButtonTitle;
-    private boolean hasReplyButton;
-
-    // Delivery Timing
-
-    private Date deliveryDate;
-    // Date actualDeliveryDate
-    private NSDateComponents deliveryRepeatInterval;
-    private TimeZone deliveryTimeZone;
-
-    // Delivery Information
-
-    // boolean presented
-    // boolean remote
-    private String soundName;
-
-    // User Notification Activation Method
-
-    private NSUserNotificationActivationType activationType;
-    // NSUserNotificationAction additionalActivationAction;
-    private ArrayList<NSUserNotificationAction> additionalActions;
+    public NSUserNotification(String title, String subtitle, String informativeText) {
+        setTitle(title);
+        setTitle(subtitle);
+        setInformativeText(informativeText);
+    }
 
     // getters and setters
 
     public String getTitle() {
-        return title;
+        return NSUserNotifications.getTitle(pointer);
     }
     public void setTitle(String title) {
-        this.title = title;
+        NSUserNotifications.setTitle(pointer, title);
     }
 
     public String getSubtitle() {
-        return subtitle;
+        return NSUserNotifications.getSubtitle(pointer);
     }
     public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+        NSUserNotifications.setSubtitle(pointer, subtitle);
     }
 
     public String getInformativeText() {
-        return informativeText;
+        return NSUserNotifications.getInformativeText(pointer);
     }
     public void setInformativeText(String informativeText) {
-        this.informativeText = informativeText;
+        NSUserNotifications.setInformativeText(pointer, informativeText);
     }
 
-    public File getContentImage() {
-        return contentImage;
-    }
+    // currently still need to implement way to get the content image
     public void setContentImage(File contentImage) {
-        this.contentImage = contentImage;
+        NSUserNotifications.setContentImagePath(pointer, contentImage.getAbsolutePath());
     }
 
     public String getIdentifier() {
-        return identifier;
+        return NSUserNotifications.getIdentifier(pointer);
     }
     public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+        NSUserNotifications.setIdentifier(pointer, identifier);
+    }
+
+    public String getResponse() {
+        return NSUserNotifications.getResponse(pointer);
     }
 
     public String getResponsePlaceholder() {
-        return responsePlaceholder;
+        return NSUserNotifications.getResponsePlaceholder(pointer);
     }
     public void setResponsePlaceholder(String responsePlaceholder) {
-        this.responsePlaceholder = responsePlaceholder;
+        NSUserNotifications.setResponsePlaceholder(pointer, responsePlaceholder);
     }
 
-    public boolean isHasActionButton() {
-        return hasActionButton;
+    public boolean getHasActionButton() {
+        return NSUserNotifications.getHasActionButton(pointer);
     }
     public void setHasActionButton(boolean hasActionButton) {
-        this.hasActionButton = hasActionButton;
+        NSUserNotifications.setHasActionButton(pointer, hasActionButton);
     }
 
     public String getActionButtonTitle() {
-        return actionButtonTitle;
+        return NSUserNotifications.getActionButtonTitle(pointer);
     }
     public void setActionButtonTitle(String actionButtonTitle) {
-        this.actionButtonTitle = actionButtonTitle;
+        NSUserNotifications.setActionButtonTitle(pointer, actionButtonTitle);
     }
 
     public String getOtherButtonTitle() {
-        return otherButtonTitle;
+        return NSUserNotifications.getOtherButtonTitle(pointer);
     }
     public void setOtherButtonTitle(String otherButtonTitle) {
-        this.otherButtonTitle = otherButtonTitle;
+        NSUserNotifications.setOtherButtonTitle(pointer, otherButtonTitle);
     }
 
-    public boolean isHasReplyButton() {
-        return hasReplyButton;
+    public boolean getHasReplyButton() {
+        return NSUserNotifications.getHasReplyButton(pointer);
     }
     public void setHasReplyButton(boolean hasReplyButton) {
-        this.hasReplyButton = hasReplyButton;
+        NSUserNotifications.setHasReplyButton(pointer, hasReplyButton);
     }
 
-    public Date getDeliveryDate() {
-        return deliveryDate;
+    public LocalDateTime getDeliveryDate() {
+        return new NSDateComponents(NSTypes.toDateComponents(NSUserNotifications.getDeliveryDate(pointer))).toLocalDateTime();
     }
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public void setDeliveryDate(LocalDateTime deliveryDate) {
+        NSUserNotifications.setDeliveryDate(pointer, NSDateComponents.fromLocalDateTime(deliveryDate).toNSDate());
+    }
+
+    public LocalDateTime getActualDeliveryDate() {
+        return new NSDateComponents(NSTypes.toDateComponents(NSUserNotifications.getActualDeliveryDate(pointer))).toLocalDateTime();
     }
 
     public NSDateComponents getDeliveryRepeatInterval() {
-        return deliveryRepeatInterval;
+        return new NSDateComponents(NSUserNotifications.getDeliveryRepeatInterval(pointer));
     }
     public void setDeliveryRepeatInterval(NSDateComponents deliveryRepeatInterval) {
-        this.deliveryRepeatInterval = deliveryRepeatInterval;
+        NSUserNotifications.setDeliveryRepeatInterval(pointer, deliveryRepeatInterval.getPointer());
     }
 
     public TimeZone getDeliveryTimeZone() {
-        return deliveryTimeZone;
+        return TimeZone.getTimeZone(NSUserNotifications.getDeliveryTimeZone(pointer));
     }
     public void setDeliveryTimeZone(TimeZone deliveryTimeZone) {
-        this.deliveryTimeZone = deliveryTimeZone;
+        NSUserNotifications.setDeliveryTimeZone(pointer, deliveryTimeZone.getID()); // not sure if getID returns the right value
+    }
+
+    public boolean isPresented() {
+        return NSUserNotifications.getIsPresented(pointer);
+    }
+
+    public boolean isRemote() {
+        return NSUserNotifications.getIsRemote(pointer);
     }
 
     public String getSoundName() {
-        return soundName;
+        return NSUserNotifications.getSoundName(pointer);
     }
     public void setSoundName(String soundName) {
-        this.soundName = soundName;
+        NSUserNotifications.setSoundName(pointer, soundName);
     }
 
     public NSUserNotificationActivationType getActivationType() {
-        return activationType;
-    }
-    public void setActivationType(NSUserNotificationActivationType activationType) {
-        this.activationType = activationType;
+        return NSUserNotificationActivationType.valueOf(NSUserNotifications.getActivationType(pointer));
     }
 
-    public ArrayList<NSUserNotificationAction> getAdditionalActions() {
-        return additionalActions;
+    public NSUserNotificationAction getAdditionalActivationAction() {
+        return new NSUserNotificationAction(NSUserNotifications.getAdditionalActivationAction(pointer));
     }
-    public void setAdditionalActions(ArrayList<NSUserNotificationAction> additionalActions) {
-        this.additionalActions = additionalActions;
+
+    public NSArray getAdditionalActions() {
+        return new NSArray(NSUserNotifications.getAdditionalActionsArray(pointer));
+    }
+    public void setAdditionalActions(NSArray additionalActions) {
+        NSUserNotifications.setAdditionalActionsArray(pointer, additionalActions.getPointer());
     }
 
     public enum NSUserNotificationActivationType {
@@ -217,4 +210,27 @@ public class NSUserNotification {
         return NSUserNotifications.getNSUserNotificationDefaultSoundName();
     }
 
+    @Override
+    public Pointer getPointer() {
+        return pointer;
+    }
+
+    @Override
+    public String nativeType() { return "NSUserNotification"; }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Pointer) {
+            return NSTypes.isEqual(pointer, (Pointer) obj);
+        }
+        if (obj instanceof NSObject) {
+            return NSTypes.isEqual(pointer, ((NSObject) obj).getPointer());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return NSTypes.hash(pointer);
+    }
 }

@@ -18,6 +18,10 @@ char *toCString(NSString *string);
 
 NSImage *toNSImage(char *path);
 
+bool isEqual(NSObject *object1, NSObject *object2);
+
+int hash(NSObject *object);
+
 NSUserNotificationActivationType toNSUserNotificationActivationType(char *string);
 
 char *toStringNSUserNotificationActivation(NSUserNotificationActivationType notificationActivationType);
@@ -44,6 +48,8 @@ int getMinute(NSDateComponents *dateComponents);
 
 void setSecond(NSDateComponents *dateComponents, int second);
 int getSecond(NSDateComponents *dateComponents);
+
+NSDateComponents *toDateComponents(NSDate *date);
 
 // uses [NSCalendar currentCalendar]
 NSDate *toNSDate(NSDateComponents *dateComponents);

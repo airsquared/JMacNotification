@@ -57,6 +57,27 @@ public class NSTypes {
     public static native Pointer toNSImage(String path);
 
     /**
+     * Returns a boolean value that indicates whether the two objects are equal.
+     *
+     * Underlying ObjC method call: {@code [object1 isEqual:object2]}
+     *
+     * @param nsObject1 A pointer to any NSObject
+     * @param nsObject2 A pointer to any NSObject
+     * @return true if both objects are equal, false otherwise
+     */
+    public static native boolean isEqual(Pointer nsObject1, Pointer nsObject2);
+
+    /**
+     * Returns an integer that can be used as a table address in a hash table structure.
+     *
+     * Underlying ObjC method call: {@code (int) [object hash]}
+     *
+     * @param nsObject a pointer to any NSObject
+     * @return
+     */
+    public static native int hash(Pointer nsObject);
+
+    /**
      * Converts a string to an ObjC NSUserNotificationActivationType.
      *
      * @return An ObjC NSUserNotificationActivationType.
@@ -97,13 +118,26 @@ public class NSTypes {
     public static native int getSecond(Pointer dateComponents);
 
     /**
+     * Converts a NSDate to a NSDateComponents.
+     *
+     * Underlying ObjC method call:
+     * {@code
+     * [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth |
+     *     NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:date] }
+     *
+     * @param nsDate A Pointer to an ObjC NSDate
+     * @return A pointer to a new ObjC NSDateComponents created from the {@code nsDateComponents}
+     */
+    public static native Pointer toDateComponents(Pointer nsDate);
+
+    /**
      * Underlying ObjC method call: {@code [[NSCalendar currentCalendar] dateFromComponents:dateComponents] }.
      *
-     * @param dateComponents A Pointer to an ObjC NSDateComponents
-     * @return A pointer to a new ObjC NSDate created from the {@code dateComponents}
+     * @param nsDateComponents A Pointer to an ObjC NSDateComponents
+     * @return A pointer to a new ObjC NSDate created from the {@code nsDateComponents}
      */
     // uses [NSCalendar currentCalendar]
-    public static native Pointer toNSDate(Pointer dateComponents);
+    public static native Pointer toNSDate(Pointer nsDateComponents);
 
 
     /* NSUserNotificationAction functions */

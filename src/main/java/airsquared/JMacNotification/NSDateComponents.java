@@ -21,95 +21,113 @@ import com.sun.jna.Pointer;
 
 import java.time.LocalDateTime;
 
-public class NSDateComponents {
+/**
+ * @author airsquared
+ */
+@SuppressWarnings("WeakerAccess")
+public class NSDateComponents implements NSObject {
 
-    private int day = -1;
-    private int month = -1;
-    private int year = -1;
+    private Pointer pointer;
 
-    private int hour = -1;
-    private int minute = -1;
-    private int second = -1;
-
-    public NSDateComponents(LocalDateTime localDateTime) {
-        this.day = localDateTime.getDayOfMonth();
-        this.month = localDateTime.getMonthValue();
-        this.year = localDateTime.getYear();
-
-        this.hour = localDateTime.getHour();
-        this.minute = localDateTime.getMinute();
-        this.second = localDateTime.getSecond();
+    public NSDateComponents() {
+        pointer = NSTypes.newNSDateComponents();
     }
 
-    public NSDateComponents() {}
+    public NSDateComponents(Pointer p) {
+        pointer = p;
+    }
 
-    public static NSDateComponents fromNative(Pointer nativeDateComponents) {
+    public static NSDateComponents fromLocalDateTime(LocalDateTime localDateTime) {
         NSDateComponents dateComponents = new NSDateComponents();
 
-        dateComponents.day = NSTypes.getDay(nativeDateComponents);
-        dateComponents.month = NSTypes.getMonth(nativeDateComponents);
-        dateComponents.year = NSTypes.getYear(nativeDateComponents);
+        dateComponents.setDay(localDateTime.getDayOfMonth());
+        dateComponents.setMonth(localDateTime.getMonthValue());
+        dateComponents.setYear(localDateTime.getYear());
 
-        dateComponents.hour = NSTypes.getHour(nativeDateComponents);
-        dateComponents.minute = NSTypes.getMinute(nativeDateComponents);
-        dateComponents.second = NSTypes.getSecond(nativeDateComponents);
+        dateComponents.setHour(localDateTime.getHour());
+        dateComponents.setMinute(localDateTime.getMinute());
+        dateComponents.setSecond(localDateTime.getSecond());
 
         return dateComponents;
     }
 
-    public Pointer toNative() {
-        Pointer nativeDateComponents = NSTypes.newNSDateComponents();
+    public LocalDateTime toLocalDateTime() {
+        return LocalDateTime.of(getYear(), getMonth(), getDay(), getHour(), getMinute(), getSecond());
+    }
 
-        NSTypes.setDay(nativeDateComponents, day);
-        NSTypes.setMonth(nativeDateComponents, month);
-        NSTypes.setYear(nativeDateComponents, year);
-
-        NSTypes.setHour(nativeDateComponents, hour);
-        NSTypes.setMinute(nativeDateComponents, minute);
-        NSTypes.setSecond(nativeDateComponents, second);
-
-        return nativeDateComponents;
+    public Pointer toNSDate() {
+        return NSTypes.toNSDate(getPointer());
     }
 
     public int getDay() {
-        return day;
+        return NSTypes.getDay(pointer);
     }
+
     public void setDay(int day) {
-        this.day = day;
+        NSTypes.setDay(pointer, day);
     }
 
     public int getMonth() {
-        return month;
+        return NSTypes.getMonth(pointer);
     }
+
     public void setMonth(int month) {
-        this.month = month;
+        NSTypes.setMonth(pointer, month);
     }
 
     public int getYear() {
-        return year;
+        return NSTypes.getYear(pointer);
     }
+
     public void setYear(int year) {
-        this.year = year;
+        NSTypes.setYear(pointer, year);
     }
 
     public int getHour() {
-        return hour;
+        return NSTypes.getHour(pointer);
     }
+
     public void setHour(int hour) {
-        this.hour = hour;
+        NSTypes.setHour(pointer, hour);
     }
 
     public int getMinute() {
-        return minute;
+        return NSTypes.getMinute(pointer);
     }
+
     public void setMinute(int minute) {
-        this.minute = minute;
+        NSTypes.setMinute(pointer, minute);
     }
 
     public int getSecond() {
-        return second;
+        return NSTypes.getSecond(pointer);
     }
+
     public void setSecond(int second) {
-        this.second = second;
+        NSTypes.setSecond(pointer, second);
+    }
+
+    @Override
+    public Pointer getPointer() {
+        return pointer;
+    }
+
+    @Override
+    public String nativeType() { return "NSDateComponents"; }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Pointer) {
+            return NSTypes.isEqual(pointer, (Pointer) obj);
+        }
+        if (obj instanceof NSObject) {
+            return NSTypes.isEqual(pointer, ((NSObject) obj).getPointer());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return NSTypes.hash(pointer);
     }
 }

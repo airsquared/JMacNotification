@@ -19,41 +19,53 @@ package airsquared.JMacNotification;
 import airsquared.JMacNotification.natives.NSTypes;
 import com.sun.jna.Pointer;
 
-public class NSUserNotificationAction {
+/**
+ * @author airsquared
+ */
+@SuppressWarnings("unused")
+public class NSUserNotificationAction implements NSObject {
 
-    private String title;
-    private String identifier;
+    private Pointer pointer;
 
     public NSUserNotificationAction(String title, String identifier) {
-        this.title = title;
-        this.identifier = identifier;
+        pointer = NSTypes.createNSUserNotificationAction(identifier, title);
     }
 
-    public NSUserNotificationAction(Pointer objCNSUserNotificationAction) {
-        this.title = NSTypes.getNSUserNotificationActionTitle(objCNSUserNotificationAction);
-        this.identifier = NSTypes.getNSUserNotificationActionIdentifier(objCNSUserNotificationAction);
-    }
-
-    public static NSUserNotificationAction fromNative(Pointer objCNSUserNotificationAction) {
-        return new NSUserNotificationAction(objCNSUserNotificationAction);
-    }
-
-    public void toNative() {
-        NSTypes.createNSUserNotificationAction(title, identifier);
+    public NSUserNotificationAction(Pointer p) {
+        pointer = p;
     }
 
     public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
+        return NSTypes.getNSUserNotificationActionTitle(pointer);
     }
 
     public String getIdentifier() {
-        return identifier;
-    }
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+        return NSTypes.getNSUserNotificationActionIdentifier(pointer);
     }
 
+    @Override
+    public Pointer getPointer() {
+        return pointer;
+    }
+
+    @Override
+    public String nativeType() {
+        return "NSUserNotificationAction";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Pointer) {
+            return NSTypes.isEqual(pointer, (Pointer) obj);
+        }
+        if (obj instanceof NSObject) {
+            return NSTypes.isEqual(pointer, ((NSObject) obj).getPointer());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return NSTypes.hash(pointer);
+    }
 }
