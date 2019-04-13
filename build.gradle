@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'net.java.dev.jna:jna:5.1.0'
+    compile 'net.java.dev.jna:jna:5.2.0'
 }
 
 boolean platformIsMacOS = System.getProperty("os.name").toLowerCase().contains("mac")
@@ -23,7 +23,10 @@ task compileObjC(type: Exec) {
     doFirst {
         if (platformIsMacOS) {
             new File("${projectDir}/src/main/resources/darwin/libJMacNotification.dylib").delete()
-            commandLine "xcodebuild", "-project", "${projectDir}/src/main/objective-c/JMacNotification/JMacNotification.xcodeproj", "-scheme", "JMacNotification", "-configuration", "Debug", "CONFIGURATION_BUILD_DIR=${buildDir}/obj-c/"
+            commandLine "xcodebuild",
+                    "-project", "${projectDir}/src/main/objective-c/JMacNotification/JMacNotification.xcodeproj",
+                    "-scheme", "JMacNotification", "-configuration", "Debug", "CONFIGURATION_BUILD_DIR=${buildDir}/obj-c/",
+                    "CODE_SIGNING_ALLOWED=\"NO\"" // disable running the `codesign` command
             copy {
                 from new File(buildDir, "obj-c/libJMacNotification.dylib")
                 into new File(projectDir, "src/main/resources/darwin/")
