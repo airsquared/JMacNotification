@@ -273,10 +273,16 @@ public class NSUserNotifications {
      *
      * This specifies why the user notification was sent to to the NSUserNotificationCenterDelegate method
      * {@code didActivateNotification}.
-     * The supported values are described in {@link #NSUserNotificationActivationTypes}.
      *
+     * The supported values are:
+     *  - NSUserNotificationActivationTypeNone: The user did not interact with the notification alert.
+     *  - NSUserNotificationActivationTypeContentsClicked: The user clicked on the contents of the notification alert.
+     *  - NSUserNotificationActivationTypeActionButtonClicked: The user clicked on the action button of the notification alert.
+     *  - NSUserNotificationActivationTypeReplied: The user replied to the notification.
+     *  - NSUserNotificationActivationTypeAdditionalActionClicked: The user clicked on the additional action button of the notification alert.
+
      * @param notification A Pointer to an ObjC NSUserNotification
-     * @return what caused a user notification to occur, one of {@link #NSUserNotificationActivationTypes}
+     * @return what caused a user notification to occur
      */
     public static native String getActivationType(Pointer notification);
 
@@ -285,7 +291,6 @@ public class NSUserNotifications {
      *
      * This specifies an additional action selected by the user when the user notification is sent to to the
      * NSUserNotificationCenterDelegate method {@code didActivateNotification}.
-     * The supported values are described in {@link #NSUserNotificationActivationTypes}.
      *
      * @param notification A Pointer to an ObjC NSUserNotification
      * @return an additional action selected by the user, a pointer to an ObjC NSUserNotificationAction
@@ -315,24 +320,6 @@ public class NSUserNotifications {
 
 
     /* constants */
-
-    /**
-     * This array contains strings that describe how the user notification was activated.
-     *
-     * The values in this array are:
-     *  - NSUserNotificationActivationTypeNone: The user did not interact with the notification alert.
-     *  - NSUserNotificationActivationTypeContentsClicked: The user clicked on the contents of the notification alert.
-     *  - NSUserNotificationActivationTypeActionButtonClicked: The user clicked on the action button of the notification alert.
-     *  - NSUserNotificationActivationTypeReplied: The user replied to the notification.
-     *  - NSUserNotificationActivationTypeAdditionalActionClicked: The user clicked on the additional action button of the notification alert.
-     */
-    public static final String[] NSUserNotificationActivationTypes = new String[]{
-            "NSUserNotificationActivationTypeNone",
-            "NSUserNotificationActivationTypeContentsClicked",
-            "NSUserNotificationActivationTypeActionButtonClicked",
-            "NSUserNotificationActivationTypeReplied",
-            "NSUserNotificationActivationTypeAdditionalActionClicked"
-    };
 
     public static native String getNSUserNotificationDefaultSoundName();
 
