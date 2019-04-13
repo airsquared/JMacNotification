@@ -37,7 +37,7 @@ public class NSUserNotificationsTest {
         String title = "title";
         String subtitle = "subtitle";
         String body = "body";
-        String contentImagePath = getClass().getResource("test-image.jpeg").getPath();
+        String contentImagePath = getClass().getClassLoader().getResource("test-image.jpeg").getPath();
         boolean hasContentImage = true;
         String actionButtonTitle = "action";
         String otherButtonTitle = "other";
