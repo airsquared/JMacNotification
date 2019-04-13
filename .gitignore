@@ -2,7 +2,6 @@
 **/.DS_Store
 # gradle
 .gradle/
-gradle/
 
 build/
 
