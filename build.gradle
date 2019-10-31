@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'net.java.dev.jna:jna:5.2.0'
+    compile 'net.java.dev.jna:jna:5.5.0'
 }
 
 task compileObjC(type: Exec) {
